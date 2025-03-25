@@ -104,6 +104,6 @@ def download_and_save(json_file_path, output_base_path="./"):
             print(f"ダウンロード失敗 {url}: {str(e)}")
 
 if __name__ == "__main__":
-    json_file_path = "./data/atcoder/url_data/code_url_001-023.json"
+    json_file_path = "./data/atcoder/url_data/code_url_072-090.json"
     output_base_path = "./data/atcoder/code" 
     download_and_save(json_file_path, output_base_path)
