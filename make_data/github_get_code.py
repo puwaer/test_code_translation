@@ -31,7 +31,7 @@ def has_valid_extension(url):
     path = urlparse(url).path
     return any(path.endswith(ext) for ext in valid_extensions)
 
-def download_and_save(json_file_path):
+def download_and_save(json_file_path, output_base_path="./"):
     try:
         with open(json_file_path, 'r', encoding='utf-8') as f:
             data = json.load(f)
@@ -54,8 +54,8 @@ def download_and_save(json_file_path):
         # raw URLに変換
         raw_url = get_raw_url(url)
         
-        # 問題番号ごとのフォルダ作成
-        folder_name = f"problem_{problem_num}"
+        # 問題番号ごとのフォルダ作成（output_base_pathを使用）
+        folder_name = os.path.join(output_base_path, f"problem_{problem_num}")
         os.makedirs(folder_name, exist_ok=True)
         
         # ファイル名を拡張子から決定
@@ -103,7 +103,7 @@ def download_and_save(json_file_path):
         except requests.RequestException as e:
             print(f"ダウンロード失敗 {url}: {str(e)}")
 
-            
 if __name__ == "__main__":
-    json_file_path = "./data/atcoder/code_url_001-023.json"
-    download_and_save(json_file_path)
+    json_file_path = "./data/atcoder/url_data/code_url_001-023.json"
+    output_base_path = "./data/atcoder/code" 
+    download_and_save(json_file_path, output_base_path)
