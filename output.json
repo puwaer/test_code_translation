@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "004",
+    "Python": "# でつoO(YOU PLAY WITH THE CARDS YOU'RE DEALT..)\nimport sys\ndef main():\n    input = sys.stdin.readline\n    H, W = map(int, input().split())\n    A = [tuple(map(int, input().split())) for _ in range(H)]\n    R = [sum(A[i]) for i in range(H)]\n    C = [sum(A[i][j] for i in range(H)) for j in range(W)]\n    ans = [[R[i] + C[j] - A[i][j] for j in range(W)] for i in range(H)]\n    for a in ans:\n        print(*a)\n\nif __name__ == '__main__':\n    main()\n",
+    "C++": "#include <iostream>\n\nusing namespace std;\n\n#pragma warning (disable: 4996)\n\n\n\nint H, W;\n\nint A[2009][2009];\n\nint Row[2009], Column[2009];\n\nint Answer[2009][2009];\n\n\n\nint main() {\n\n\t// Step #1. “ü—Í\n\n\tcin >> H >> W;\n\n\tfor (int i = 1; i <= H; i++) {\n\n\t\tfor (int j = 1; j <= W; j++) {\n\n\t\t\tscanf(\"%d\", &A[i][j]);\n\n\t\t}\n\n\t}\n\n\t\n\n\t// Step #2. ‘OŒvŽZ\n\n\tfor (int i = 1; i <= H; i++) {\n\n\t\tfor (int j = 1; j <= W; j++) {\n\n\t\t\tRow[i] += A[i][j];\n\n\t\t\tColumn[j] += A[i][j];\n\n\t\t}\n\n\t}\n\n\n\n\t// Step #3. “š‚¦‚ÌŒvŽZ\n\n\tfor (int i = 1; i <= H; i++) {\n\n\t\tfor (int j = 1; j <= W; j++) {\n\n\t\t\tAnswer[i][j] = Row[i] + Column[j] - A[i][j];\n\n\t\t}\n\n\t}\n\n\n\n\t// Step #4. �o—Í\n\n\tfor (int i = 1; i <= H; i++) {\n\n\t\tfor (int j = 1; j <= W; j++) {\n\n\t\t\tif (j >= 2) printf(\" \");\n\n\t\t\tprintf(\"%d\", Answer[i][j]);\n\n\t\t}\n\n\t\tprintf(\"\\n\");\n\n\t}\n\n\treturn 0;\n\n}"
+  },
+  {
+    "id": 2,
+    "name": "004",
+    "Crystal": "h, w = read_line.split.map(&.to_i)\na = (1..h).map { read_line.split.map(&.to_i) }\nrow_sum = a.map(&.sum)\ncolumn_sum = a.transpose.map(&.sum)\n(0...h).each do |i|\n  puts (0...w).join(' ') { |j|\n    row_sum[i] + column_sum[j] - a[i][j]\n  }\nend\n",
+    "Kuin": "func main()\n\tvar h: int :: cui@inputInt()\n\tvar w: int :: cui@inputInt()\n\tdo cui@delimiter(\"\")\n\tvar s: []char :: cui@inputStr()\n\tvar idx: int :: 0\n\tvar a: [][]int :: #[h, w]int\n\tvar row: []int :: #[h]int\n\tvar col: []int :: #[w]int\n\tfor y(0, h - 1)\n\t\tfor x(0, w - 1)\n\t\t\tvar v: int :: 0\n\t\t\twhile('0' <= s[idx])\n\t\t\t\tdo v :* 10\n\t\t\t\tdo v :+ s[idx] $ int - '0' $ int\n\t\t\t\tdo idx :+ 1\n\t\t\tend while\n\t\t\tdo idx :+ 1\n\t\t\tdo a[y][x] :: v\n\t\t\tdo row[y] :+ v\n\t\t\tdo col[x] :+ v\n\t\tend for\n\tend for\n\tfor y(0, h - 1)\n\t\tfor x(0, w - 1)\n\t\t\tdo a[y][x] :: row[y] + col[x] - a[y][x]\n\t\tend for\n\tend for\n\tfor y(0, h - 1)\n\t\tdo cui@print(a[y].join(\" \"))\n\t\tdo cui@print(\"\\n\")\n\tend for\nend func\n"
+  },
+  {
+    "id": 3,
+    "name": "004",
+    "Ruby": "lines = readlines\n\nh, w = lines.shift.split.map(&:to_i)\n\na = Array.new(h) do |i|\n    lines[i].split.map(&:to_i)\nend\n\ncols = a.transpose.map(&:sum)\n\nfor i in 0...h\n    a_i = a[i]\n    row = a_i.sum\n    for j in 0...w\n        a_i[j] = (row + cols[j] - a_i[j]).to_s\n    end\n    puts a_i.join(' ')\nend\n",
+    "Python": "# でつoO(YOU PLAY WITH THE CARDS YOU'RE DEALT..)\nimport sys\ndef main():\n    input = sys.stdin.readline\n    H, W = map(int, input().split())\n    A = [tuple(map(int, input().split())) for _ in range(H)]\n    R = [sum(A[i]) for i in range(H)]\n    C = [sum(A[i][j] for i in range(H)) for j in range(W)]\n    ans = [[R[i] + C[j] - A[i][j] for j in range(W)] for i in range(H)]\n    for a in ans:\n        print(*a)\n\nif __name__ == '__main__':\n    main()\n"
+  }
+]

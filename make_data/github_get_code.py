@@ -55,7 +55,7 @@ def download_and_save(json_file_path, output_base_path="./"):
         raw_url = get_raw_url(url)
         
         # 問題番号ごとのフォルダ作成（output_base_pathを使用）
-        folder_name = os.path.join(output_base_path, f"problem_{problem_num}")
+        folder_name = os.path.join(output_base_path, f"{problem_num}")
         os.makedirs(folder_name, exist_ok=True)
         
         # ファイル名を拡張子から決定
@@ -80,6 +80,12 @@ def download_and_save(json_file_path, output_base_path="./"):
                 filename += '.rb'
             elif raw_url.endswith('.kn'):
                 filename += '.kn'
+            elif raw_url.endswith('.cc'):
+                filename += '.cc'
+            elif raw_url.endswith('.cs'):
+                filename += '.cs'
+            elif raw_url.endswith('.swift'):
+                filename += '.swift'            
             else:
                 filename += '.txt'
         
