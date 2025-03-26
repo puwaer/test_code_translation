@@ -1,5 +1,5 @@
-モデル llama-3.2-3B
-test_name llama-3.2-3B_lora_1
+モデル llama-3.2-1B
+test_name llama-3.2-1B_lora_1
 deta multilingual_train_sft.json
 
 high_para
@@ -24,7 +24,7 @@ trainer = SFTTrainer(
     dataset_text_field="formatted_text",
     packing = False,
     args = TrainingArguments(
-        per_device_train_batch_size = 2,
+        per_device_train_batch_size = 4,
         gradient_accumulation_steps = 4,
         num_train_epochs = 1,
         logging_steps = 10,
