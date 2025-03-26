@@ -3,7 +3,7 @@ test_name llama-3.2-3B_lora_1
 deta multilingual_train_sft.json
 
 high_para
-max_seq_length = 2048                                  
+max_seq_length = 1024                                  
 dtype = None                                           
 load_in_4bit = True     
 r = 16,                                                         
