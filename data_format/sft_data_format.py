@@ -18,15 +18,17 @@ def transform_json(input_data):
             "id": str(item["id"]),
             "input": f"Translate {input_lang} to {output_lang}:{item[input_lang]}\nDo not return anything including notes and the like except for one translated {output_lang} code.",
             "output": item[output_lang],
-            "input_lang": input_lang,
-            "output_lang": output_lang
+            "input_language": input_lang,
+            "output_language": output_lang
         }
         result.append(new_item)
     return result
 
 if __name__ == "__main__":
-    input_filename = "./data/train_data/base_train_data/multilingual_train_fix.json"    # 入力ファイル名
-    output_filename = "./data/train_data/format_train_data/multilingual_train_sft.json"  # 出力ファイル名
+    #input_filename = "./data/train_data/base_train_data/multilingual_train_fix.json"    
+    #output_filename = "./data/train_data/format_train_data/multilingual_train_sft.json"  
+    input_filename = "./data/benchmark_data/multilingual_test_fix.json"    
+    output_filename = "./data/benchmark_data/multilingual_test_prompt.json"  
     
     # 入力ファイルの読み込み
     with open(input_filename, 'r', encoding='utf-8') as f:
