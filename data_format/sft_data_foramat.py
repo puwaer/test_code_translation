@@ -1,0 +1,1 @@
+text = f"Translate {a_program} to {b_progaram}:{source}\nDo not return anything including notes and the like except for one translated {b_progaram} code."
