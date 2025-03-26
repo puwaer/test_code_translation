@@ -18,6 +18,8 @@ def sample_and_reindex_json(input_file, output_file, n):
         json.dump(random_samples, f, indent=2, ensure_ascii=False)
 
 if __name__ == "__main__":
+    #input_filename = "./data/benchmark_data/multilingual_test_prompt.json"    
+    #output_filename = "./data/benchmark_data/multilingual_test_prompt_300.json"
     input_filename = "./data/benchmark_data/multilingual_test_prompt.json"    
     output_filename = "./data/benchmark_data/multilingual_test_prompt_300.json"
     
