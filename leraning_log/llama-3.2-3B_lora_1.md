@@ -32,12 +32,12 @@ trainer = SFTTrainer(
         save_steps=100,
         save_total_limit=2,
         max_steps=-1,
-        learning_rate = 2e-4,                   #デフォルト2e-4
+        learning_rate = 2e-4,                   
         fp16 = not is_bfloat16_supported(),
         bf16 = is_bfloat16_supported(),
         group_by_length=True,
-        seed = 3407,                            #デフォルト3407
-        output_dir = model_adapter,             #wandbのプロジェクトの名前
+        seed = 3407,                            
+        output_dir = model_adapter,             
         report_to = "wandb",
     ),
 )
