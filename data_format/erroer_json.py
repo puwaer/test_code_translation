@@ -14,8 +14,8 @@ def create_json_array(input_file, output_file):
 
 # 使用例
 if __name__ == "__main__":
-    input_filename = "./data/backup_data/multilingual_valid.json"    # 入力ファイル名
-    output_filename = "./data/backup_data/test.json"  # 出力ファイル名
+    input_filename = "./data/train_data/base_train_data/multilingual_train.json"    # 入力ファイル名
+    output_filename = "./data/train_data/base_train_data/test.json"  # 出力ファイル名
     
     try:
         create_json_array(input_filename, output_filename)
