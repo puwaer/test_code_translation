@@ -41,3 +41,10 @@ trainer = SFTTrainer(
         report_to = "wandb",
     ),
 )
+
+プロンプトの定型文
+prompt = """### Instruction
+f"Translate {input_language} to {output_language}:{input_code}\nDo not return anything including notes and the like except for one translated {output_language} code."
+### Response
+{}"""
+
