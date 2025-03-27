@@ -2,13 +2,43 @@ import json
 import subprocess
 import os
 
+import json
+import subprocess
+import os
+
 def execute_code_in_container(code, language):
     """指定されたコードを対応するコンテナで実行"""
     try:
-        # 一時ファイルにコードを書き込み
-        temp_file = f"temp.{language.lower()}"
-        with open(f"app/{temp_file}", "w") as f:
+        # 言語ごとの正しいファイル拡張子
+        ext_map = {
+            "Python": "py",
+            "C": "c",
+            "C++": "cpp",
+            "VB": "vb",
+            "GO": "go",
+            "PHP": "php",
+            "Java": "java",
+            "C#": "cs"
+        }
+        
+        if language not in ext_map:
+            return {"error": f"Unsupported language: {language}"}
+        
+        # 一時ファイル名を正しい拡張子で生成
+        temp_file = f"temp.{ext_map[language]}"
+        temp_path = os.path.join("app", temp_file)
+        
+        # ディレクトリが存在するか確認
+        os.makedirs("app", exist_ok=True)
+        
+        # コードを一時ファイルに書き込み
+        print(f"Writing code to {temp_path}")
+        with open(temp_path, "w", encoding="utf-8") as f:
             f.write(code)
+        
+        # ファイルが作成されたか確認
+        if not os.path.exists(temp_path):
+            return {"error": f"Failed to create file: {temp_path}"}
         
         # 言語に応じたコンテナで実行
         service_map = {
@@ -21,9 +51,6 @@ def execute_code_in_container(code, language):
             "Java": "java",
             "C#": "csharp"
         }
-        
-        if language not in service_map:
-            return {"error": "Unsupported language"}
         
         service = service_map[language]
         
@@ -41,14 +68,15 @@ def execute_code_in_container(code, language):
         elif language == "PHP":
             cmd = ["docker-compose", "exec", "-T", service, "php", temp_file]
         elif language == "Java":
-            cmd = ["docker-compose", "exec", "-T", service, "sh", "-c", "javac Temp.java && java Temp"]
+            cmd = ["docker-compose", "exec", "-T", service, "sh", "-c", "javac temp.java && java temp"]
         elif language == "C#":
             cmd = ["docker-compose", "exec", "-T", service, "sh", "-c", "csc temp.cs && mono temp.exe"]
         
+        print(f"Executing command: {' '.join(cmd)}")
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=5)
         
         # 一時ファイルを削除
-        os.remove(f"app/{temp_file}")
+        os.remove(temp_path)
         
         return {
             "output": result.stdout,
@@ -59,39 +87,37 @@ def execute_code_in_container(code, language):
     except subprocess.TimeoutExpired:
         return {"error": "Execution timed out"}
     except Exception as e:
-        return {"error": str(e)}
+        return {"error": f"Exception occurred: {str(e)}"}
 
 def process_json(input_file, output_file):
-    # JSONファイルを読み込む
-    with open(input_file, 'r', encoding='utf-8') as f:
-        data = json.load(f)
+    try:
+        with open(input_file, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+    except Exception as e:
+        print(f"Failed to load input file: {str(e)}")
+        return
     
-    # 結果を格納するリスト
     results = []
-    
-    # 各エントリを処理
     for entry in data:
         code = entry["output"]
         language = entry["output_language"]
         
-        # コードをコンテナで実行
         execution_result = execute_code_in_container(code, language)
         
-        # 結果を整形
         result_entry = {
             "id": entry["id"],
             "language": language,
-            "output_code": code,
+            "input_code": code,
             "execution_result": execution_result
         }
         results.append(result_entry)
     
-    # 結果をJSONファイルに書き込む
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
 
 if __name__ == "__main__":
-    input_file = "input.json"
+    input_file = "input.json"  # 修正: app/内に配置
     output_file = "output.json"
     process_json(input_file, output_file)
     print(f"Results have been written to {output_file}")
+
