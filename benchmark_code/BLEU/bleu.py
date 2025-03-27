@@ -1,14 +1,17 @@
 import json
-import os
 import nltk
 from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 
-def bleu_score(input_1, input_2):
+def bleu_score_process(input_1, input_2):
     reference = input_1.split()
     candidate = input_2.split()
     smoothie = SmoothingFunction().method1 
-    bleu_score_4 = sentence_bleu([reference], candidate, weights=(0.25, 0.25, 0.25, 0.25), smoothing_function=smoothie)
-    return bleu_score_4
+    bleu_score_1 = sentence_bleu([reference], candidate, weights=(1, 0, 0, 0), smoothing_function=smoothie)                 # 1-gram
+    bleu_score_2 = sentence_bleu([reference], candidate, weights=(0.5, 0.5, 0, 0), smoothing_function=smoothie)             # 2-gram
+    bleu_score_3 = sentence_bleu([reference], candidate, weights=(0.33, 0.33, 0.33, 0), smoothing_function=smoothie)        # 3-gram
+    bleu_score_4 = sentence_bleu([reference], candidate, weights=(0.25, 0.25, 0.25, 0.25), smoothing_function=smoothie)     # 4-gram
+    
+    return [bleu_score_1, bleu_score_2, bleu_score_3, bleu_score_4] 
 
 def process_json(input_file_1, input_file_2, output_file):
     try:
@@ -40,13 +43,16 @@ def process_json(input_file_1, input_file_2, output_file):
         text_1 = entry_1["output"]
         text_2 = entry_2["output"]
         
-        execution_result = bleu_score(text_1, text_2)
+        bleu_score = bleu_score_process(text_1, text_2)
         
         result_entry = {
             "id": entry_id,
             "input_language": input_language,            
             "output_language": output_language,
-            "execution_result": execution_result
+            "bleu_score_1": bleu_score[0],
+            "bleu_score_2": bleu_score[1],
+            "bleu_score_3": bleu_score[2],            
+            "bleu_score_4": bleu_score[3],
         }
         results.append(result_entry)
     
