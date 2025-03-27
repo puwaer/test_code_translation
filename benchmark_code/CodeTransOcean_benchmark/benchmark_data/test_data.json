@@ -1,1 +1,0 @@
-{"source": "Translate Python to Java: print('Hello')", "prediction": "System.out.println(\"Hello\");", "target": "System.out.println(\"Hello\");"}
