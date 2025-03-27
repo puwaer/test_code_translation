@@ -1,3 +1,3 @@
 FROM gcc:latest
 WORKDIR /app
-CMD ["gcc", "-o", "temp", "temp.c", "&&", "./temp"]
+CMD ["tail", "-f", "/dev/null"]

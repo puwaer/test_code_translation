@@ -1,3 +1,3 @@
 FROM mono:latest
 WORKDIR /app
-CMD ["vbnc", "temp.vb"]
+CMD ["tail", "-f", "/dev/null"]
