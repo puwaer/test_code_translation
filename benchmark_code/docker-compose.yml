@@ -1,0 +1,34 @@
+version: '3.8'
+services:
+  python:
+    build: ./python
+    volumes:
+      - ./app:/app
+  c:
+    build: ./c
+    volumes:
+      - ./app:/app
+  cpp:
+    build: ./cpp
+    volumes:
+      - ./app:/app
+  vb:
+    build: ./vb
+    volumes:
+      - ./app:/app
+  go:
+    build: ./go
+    volumes:
+      - ./app:/app
+  php:
+    build: ./php
+    volumes:
+      - ./app:/app
+  java:
+    build: ./java
+    volumes:
+      - ./app:/app
+  csharp:
+    build: ./csharp
+    volumes:
+      - ./app:/app

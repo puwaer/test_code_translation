@@ -71,8 +71,8 @@ def process_json(input_file, output_file):
     
     # 各エントリを処理
     for entry in data:
-        code = entry["input"]
-        language = entry["input_language"]
+        code = entry["output"]
+        language = entry["output_language"]
         
         # コードをコンテナで実行
         execution_result = execute_code_in_container(code, language)
@@ -81,7 +81,7 @@ def process_json(input_file, output_file):
         result_entry = {
             "id": entry["id"],
             "language": language,
-            "input_code": code,
+            "output_code": code,
             "execution_result": execution_result
         }
         results.append(result_entry)
@@ -90,13 +90,6 @@ def process_json(input_file, output_file):
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
 
-if __name__ == "__main__":
-    input_file = "input.json"
-    output_file = "output.json"
-    process_json(input_file, output_file)
-    print(f"Results have been written to {output_file}")
-
-# 使用例
 if __name__ == "__main__":
     input_file = "input.json"
     output_file = "output.json"
