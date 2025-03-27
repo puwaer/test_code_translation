@@ -7,15 +7,15 @@ jsonl
 
 
 実行例
-python eval_script.py --input_file test_data.jsonl --source_names Python --target_names Java --codebleu
+python run_score.py --input_file ./benchmark_data/test_data.jsonl --source_names Python --target_names Java --codebleu
 
 言語を指定する場合
 --source_names Python → Python からの変換のみ評価
 
 
 複数言語を指定する場合
-python eval_script.py --input_file test_data.jsonl --source_names Python,C++ --target_names Java,C#
+python run_score.py --input_file test_data.jsonl --source_names Python,C++ --target_names Java,C#
 
 全言語の評価を行う場合
-python eval_script.py --input_file test_data.jsonl --codebleu
+python run_score.py --input_file ./benchmark_data/test_data.jsonl --codebleu
 
