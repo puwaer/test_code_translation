@@ -32,7 +32,7 @@ def randam_id_sort_json(input_filename, output_filename):
     print(f"処理が完了しました。結果を {output_filename} に保存しました。")
 
 if __name__ == "__main__":
-    input_filename = "./data/train_data/base_train_data/kyopro_codes_cpp_java.json"    
+    input_filename = "./data/train_data/base_train_data/multilingual_train_and_kyopro.json"    
     output_filename = "./data/train_data/base_train_data/test.json"  
     randam_id_sort_json(input_filename, output_filename)
 
