@@ -8,8 +8,15 @@ output_2 = "package main\n\nimport (\n    \"fmt\"\n    \"math\"\n    \"math/rand
 reference = output_1.split()
 candidate = output_2.split()
 
-# BLEUスコアの計算（4-gramまで）
+# BLEUスコアの計算（1-gramから4-gramまで）
 smoothie = SmoothingFunction().method1 
+bleu_score_1 = sentence_bleu([reference], candidate, weights=(1, 0, 0, 0), smoothing_function=smoothie)                 # 1-gram
+bleu_score_2 = sentence_bleu([reference], candidate, weights=(0.5, 0.5, 0, 0), smoothing_function=smoothie)             # 2-gram
+bleu_score_3 = sentence_bleu([reference], candidate, weights=(0.33, 0.33, 0.33, 0), smoothing_function=smoothie)        # 3-gram
 bleu_score_4 = sentence_bleu([reference], candidate, weights=(0.25, 0.25, 0.25, 0.25), smoothing_function=smoothie)     # 4-gram
 
+# 結果の出力
+print(f"BLEU-1 score: {bleu_score_1}")
+print(f"BLEU-2 score: {bleu_score_2}")
+print(f"BLEU-3 score: {bleu_score_3}")
 print(f"BLEU-4 score: {bleu_score_4}")

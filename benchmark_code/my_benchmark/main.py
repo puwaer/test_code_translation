@@ -2,10 +2,6 @@ import json
 import subprocess
 import os
 
-import json
-import subprocess
-import os
-
 def execute_code_in_container(code, language):
     """指定されたコードを対応するコンテナで実行"""
     try:
