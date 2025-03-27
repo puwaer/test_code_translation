@@ -8,6 +8,7 @@ jsonl
 
 実行例
 python run_score.py --input_file ./benchmark_data/test_data.jsonl --source_names Python --target_names Java --codebleu
+python run_score.py --input_file ./benchmark_data/test_data.json --source_names Python --target_names Java --codebleu
 
 言語を指定する場合
 --source_names Python → Python からの変換のみ評価
@@ -19,3 +20,8 @@ python run_score.py --input_file test_data.jsonl --source_names Python,C++ --tar
 全言語の評価を行う場合
 python run_score.py --input_file ./benchmark_data/test_data.jsonl --codebleu
 
+pip install tree-sitter tree-sitter-java tree-sitter-python
+
+
+
+pip install tree-sitter==0.23.2 tree-sitter-java==0.23.5 tree-sitter-python==0.23.6

@@ -1,22 +1,3 @@
-# coding=utf-8
-# Copyright 2018 The Google AI Language Team Authors and The HuggingFace Inc. team.
-# Copyright (c) 2018, NVIDIA CORPORATION.  All rights reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-"""
-
-"""
-
 import logging
 import argparse
 import numpy as np
@@ -30,7 +11,6 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s -   %(message
                     datefmt='%m/%d/%Y %H:%M:%S',
                     level=logging.INFO)
 logger = logging.getLogger(__name__)
-
 
 def main():
     parser = argparse.ArgumentParser()
@@ -64,12 +44,12 @@ def main():
     pre_references = [pre_references]
     bleu = round(_bleu_json_select(args.input_file, args, args.naive), 2)
     if args.codebleu:
-        codebleu = calc_code_bleu.get_codebleu_list(pre_references, hypothesis, 'python')
+        target_lang = args.target_names.split(',')[0].lower()  # ターゲット言語を小文字で取得
+        codebleu = calc_code_bleu.get_codebleu_list(pre_references, hypothesis, target_lang)
         result = {'em': round(np.mean(dev_accs) * 100, 2), 'bleu': bleu, 'codebleu': round(codebleu * 100, 2)}
     else:
         result = {'em': round(np.mean(dev_accs) * 100, 2), 'bleu': bleu}
     print(result)
-
 
 if __name__ == "__main__":
     main()
