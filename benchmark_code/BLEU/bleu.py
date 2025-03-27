@@ -63,7 +63,7 @@ def process_json(input_file_1, input_file_2, output_file):
 if __name__ == "__main__":
     input_file_1 = "./benchmark_result/multilingual_test_prompt_300.json"  
     input_file_2 = "./benchmark_result/llm_llama-3.2-1B_lora_1_output.json"  
-    output_file = "./benchmark_result/bleu_score.json"
+    output_file = f"./benchmark_result/bleu_score_llama-3.2-1B_lora_1.json"
     process_json(input_file_1, input_file_2, output_file)
 
 
