@@ -10,3 +10,7 @@ docker ps
 
 
 python3 main.py
+
+
+
+goがうまく実行出来ない
