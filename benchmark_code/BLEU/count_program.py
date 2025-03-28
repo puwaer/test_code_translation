@@ -41,9 +41,9 @@ def process_json(input_file, output_file):
         print(f"エラー: 出力ファイルの保存に失敗しました - {str(e)}")
 
 if __name__ == "__main__":
-    input_file = "./benchmark_result/multilingual_test_prompt_300.json"
-    output_file = "./benchmark_result/analysis_bleu_program/multilingual_test_prompt_300_count_program.json"
-    #input_file = "./data/benchmark_data/multilingual_test_prompt.json"
-    #output_file = "./benchmark_result/analysis_bleu_program/multilingual_test_prompt_count_program.json"
+    #input_file = "./benchmark_result/multilingual_test_prompt_300.json"
+    #output_file = "./benchmark_result/analysis_program_bleu/multilingual_test_prompt_300_count_program.json"
+    input_file = "./data/train_data/format_train_data/multilingual_train_and_kyopro_sft.json"
+    output_file = "./benchmark_result/analysis_program_bleu/multilingual_train_and_kyopro_sft_count_program.json"
 
     process_json(input_file, output_file)
