@@ -65,6 +65,6 @@ def process_json(input_file, output_file):
         print(f"エラー: 出力ファイルの保存に失敗しました - {str(e)}")
 
 if __name__ == "__main__":
-    input_file = "./benchmark_result/bleu_score/bleu_score_llama-3.2-1B_lora_1.json"
-    output_file = "./benchmark_result/analysis_program_bleu/avg_bleu_score_llama-3.2-1B_lora_1.json"
+    input_file = "./benchmark_result/bleu_score/bleu_score_llama-3.2-1B_lora_2.json"
+    output_file = "./benchmark_result/analysis_program_bleu/avg_bleu_score_llama-3.2-1B_lora_2.json"
     process_json(input_file, output_file)
