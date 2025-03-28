@@ -1,6 +1,7 @@
 モデル llama-3.2-1B
 test_name llama-3.2-1B_lora_2
 deta multilingual_train_and_kyopro.json
+benchmark_data multilingual_test_prompt_500.json
 
 high_para
 max_seq_length = 1024                                  

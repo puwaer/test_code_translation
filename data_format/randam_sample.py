@@ -21,10 +21,10 @@ if __name__ == "__main__":
     #input_filename = "./data/benchmark_data/multilingual_test_prompt.json"    
     #output_filename = "./data/benchmark_data/multilingual_test_prompt_300.json"
     input_filename = "./data/benchmark_data/multilingual_test_prompt.json"    
-    output_filename = "./data/benchmark_data/multilingual_test_prompt_300.json"
+    output_filename = "./data/benchmark_data/multilingual_test_prompt_500.json"
     
     # サンプリングする数（例として5としています）
-    sample_size = 300
+    sample_size = 500
     
     try:
         sample_and_reindex_json(input_filename, output_filename, sample_size)
