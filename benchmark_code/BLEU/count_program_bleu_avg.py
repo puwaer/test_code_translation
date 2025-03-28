@@ -14,24 +14,48 @@ def process_json(input_file, output_file):
 
     combinations = [(item["input_language"], item["output_language"]) for item in data]
     combination_counts = Counter(combinations)
+    
+    # 各組み合わせごとのbleu_score_4のリストを作成
+    bleu_scores = {}
+    all_bleu_scores = []  
+    for item in data:
+        key = (item["input_language"], item["output_language"])
+        if key not in bleu_scores:
+            bleu_scores[key] = []
+        bleu_scores[key].append(item["bleu_score_4"])
+        all_bleu_scores.append(item["bleu_score_4"])  
 
-    sorted_combinations = dict(sorted(
-        combination_counts.items(),
-        key=lambda x: (-x[1], x[0][0], x[0][1])  # カウント降順、入力言語、出力言語の順でソート
-    ))
-
-    result = {
-        "combination_counts(input_language -> output_language)": {
-            f"{input_lang} -> {output_lang}": count 
-            for (input_lang, output_lang), count in sorted_combinations.items()
-        },
-        "total_unique_combinations": len(combination_counts)
+    bleu_averages = {
+        key: sum(scores) / len(scores)
+        for key, scores in bleu_scores.items()
     }
 
-    print("Input-Output言語の組み合わせとその出現回数（多い順）:")
-    for (input_lang, output_lang), count in sorted_combinations.items():
-        print(f"{input_lang} -> {output_lang}: {count}回")
+    # 全体のbleu_score_4の平均を計算
+    overall_bleu_avg = sum(all_bleu_scores) / len(all_bleu_scores) if all_bleu_scores else 0
+
+    sorted_combinations = sorted(
+        combination_counts.items(),
+        key=lambda x: (-x[1], x[0][0], x[0][1])
+    )
+
+    result = {
+        "combination_counts_and_bleu4_avg": {
+            f"{input_lang} -> {output_lang}": {
+                "count": count,
+                "bleu_score_4_average": round(bleu_averages[(input_lang, output_lang)],6)
+            }
+            for (input_lang, output_lang), count in sorted_combinations
+        },
+        "total_unique_combinations": len(combination_counts),
+        "overall_bleu_score_4_average": round(overall_bleu_avg,6)
+    }
+
+    print("Input-Output言語の組み合わせとその出現回数・BLEUスコア4の平均（多い順）:")
+    for (input_lang, output_lang), count in sorted_combinations:
+        avg_bleu = bleu_averages[(input_lang, output_lang)]
+        print(f"{input_lang} -> {output_lang}: {count}回, BLEU-4平均: {avg_bleu:.6f}")
     print(f"\nユニークな組み合わせの総数: {len(combination_counts)}")
+    print(f"全体のBLEUスコア4の平均: {overall_bleu_avg:.6f}")
 
     try:
         with open(output_file, 'w', encoding='utf-8') as f:
@@ -41,9 +65,6 @@ def process_json(input_file, output_file):
         print(f"エラー: 出力ファイルの保存に失敗しました - {str(e)}")
 
 if __name__ == "__main__":
-    input_file = "./benchmark_result/multilingual_test_prompt_300.json"
-    output_file = "./benchmark_result/analysis_bleu_program/multilingual_test_prompt_300_count_program.json"
-    #input_file = "./data/benchmark_data/multilingual_test_prompt.json"
-    #output_file = "./benchmark_result/analysis_bleu_program/multilingual_test_prompt_count_program.json"
-
+    input_file = "./benchmark_result/bleu_score/bleu_score_llama-3.2-1B_lora_1.json"
+    output_file = "./benchmark_result/analysis_program_bleu/avg_bleu_score_llama-3.2-1B_lora_1.json"
     process_json(input_file, output_file)
