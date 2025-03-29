@@ -1,6 +1,15 @@
 sft用データセット
 
-| 入力言語 | 出力言語 | 変換回数 |
+---
+marp: true
+theme: default
+size: 16:9
+paginate: true
+---
+
+
+
+| input language | output language | ペア数 |
 |----------|----------|---------|
 | PHP | Python | 947 |
 | C++ | Python | 920 |
