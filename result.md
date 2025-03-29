@@ -3,7 +3,7 @@ sft用データセット
 ---
 marp: true
 theme: default
-size: 16:9
+size: 30:5
 paginate: true
 ---
 
