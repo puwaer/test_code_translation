@@ -7,6 +7,9 @@ size: 30:5
 paginate: true
 ---
 
+<style>
+table { font-size: 10px; }
+</style>
 
 
 | input language | output language | ペア数 |
